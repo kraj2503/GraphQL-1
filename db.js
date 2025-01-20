@@ -20,14 +20,14 @@ const reviews = [
         },
         {
                 id: "2",
-                rating: 5,
+                rating: 2,
                 content: "Masterpiece of open-world design.",
                 author_id: "2",
                 game_id: "1"
         },
         {
                 id: "3",
-                rating: 4,
+                rating: 6,
                 content: "Great for creativity and fun with friends.",
                 author_id: "2",
                 game_id: "3"

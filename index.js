@@ -3,6 +3,7 @@ import { startStandaloneServer } from "@apollo/server/standalone";
 import db from './db.js'
 //server-setup
 import { typeDefs } from "./schema.js";
+import { addSyntheticLeadingComment } from "typescript";
 
 
 
@@ -59,6 +60,32 @@ const resolvers = {
                         console.log("author id ", b)
                         return b
 
+                }
+        },
+        Mutation:{
+                deleteGame(_,args){
+                        db.games= db.games.filter((game)=>game.id!=args.id)
+                        return db.games
+                }, 
+                addGame(_,args){
+                        console.log(args.game)
+
+                       let game = {
+                               id:Math.floor(Math.random()*10000).toString(),
+                        ...args.game
+                       }
+                      db.games.push(game)
+                       console.log(game)
+                       return game
+                },
+                updateGame(_,args){
+                        db.games = db.games.map((g)=>{
+                                if(g.id === args.id){
+                                        return {...g, ...args.edits}
+                                }
+                                return g
+                        })
+                        return db.games.find((g)=>g.id===args.id)
                 }
         }
 }
